@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     volumes:
-      - ./skeleton:/app
+      - ./app:/app
     environment:
       DATABASE_URL: "postgresql://symfony_user:symfony_password@symfony_db:5432/symfony_db?serverVersion=16&charset=utf8"
       APP_ENV: dev
@@ -17,7 +17,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./skeleton:/app
+      - ./app:/app
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - php
