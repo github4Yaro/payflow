@@ -645,7 +645,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     uid?: bool|array{ // Uid configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *         default_uuid_version?: 7|6|4|1|Param, // Default: 7
  *         name_based_uuid_version?: 5|3|Param, // Default: 5
  *         name_based_uuid_namespace?: scalar|Param|null,
@@ -890,7 +890,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     migrations?: list<scalar|Param|null>,
  *     connection?: scalar|Param|null, // Connection name to use for the migrations database. // Default: null
- *     em?: scalar|Param|null, // Entity manager name to use for the migrations database (available when doctrine/orm is installed). // Default: null
+ *     em?: scalar|Param|null, // Infrastructure manager name to use for the migrations database (available when doctrine/orm is installed). // Default: null
  *     all_or_nothing?: scalar|Param|null, // Run all migrations in a transaction. // Default: false
  *     check_database_platform?: scalar|Param|null, // Adds an extra check in the generated migrations to allow execution only on the same platform as they were initially generated on. // Default: true
  *     custom_template?: scalar|Param|null, // Custom template path for generated migration classes. // Default: null
