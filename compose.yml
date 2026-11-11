@@ -5,8 +5,9 @@ services:
       dockerfile: docker/php/Dockerfile
     volumes:
       - ./app:/app
+      - ./docker/php/conf.d/php.ini:/usr/local/etc/php/conf.d/zz-app.ini:ro
     environment:
-      DATABASE_URL: "postgresql://symfony_user:symfony_password@symfony_db:5432/symfony_db?serverVersion=16&charset=utf8"
+      DATABASE_URL: "postgresql://symfony_user:symfony_password@db:5432/symfony_db?serverVersion=16&charset=utf8"
       APP_ENV: dev
     depends_on:
       db:

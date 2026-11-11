@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd
+    "
+>
+    <entity
+            name="App\Domain\Invoice\Invoice"
+            table="invoices"
+    >
+        <unique-constraints>
+            <unique-constraint
+                    name="uniq_invoice_number"
+                    columns="number_series,number_sequence"
+            />
+
+            <unique-constraint
+                    name="uniq_active_invoice_per_order"
+                    columns="order_id"
+            >
+                <options>
+                    <option name="where">((status)::text &lt;&gt; 'void'::text)</option>
+                </options>
+            </unique-constraint>
+        </unique-constraints>
+
+        <id
+                name="id"
+                type="invoice_id"
+                column="id"
+        />
+
+        <field
+                name="status"
+                column="status"
+                enum-type="App\Domain\Invoice\InvoiceStatus"
+        />
+
+        <field
+                name="orderId"
+                type="order_id"
+                column="order_id"
+        />
+
+        <field
+                name="issuedAt"
+                column="issued_at"
+                type="datetimetz_immutable"
+        />
+
+        <embedded
+                name="number"
+                class="App\Domain\Invoice\InvoiceNumber"
+                column-prefix="number_"
+        />
+
+        <embedded
+                name="amount"
+                class="App\Domain\Shared\Money"
+                column-prefix="total_"
+        />
+    </entity>
+</doctrine-mapping>
